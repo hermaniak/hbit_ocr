@@ -1,0 +1,44 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="hbit_ocr.list">
+      <field name="name">hbit_ocr list</field>
+      <field name="model">hbit_ocr.hbit_ocr</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="re_name"/>
+          <field name="re_exp"/>
+          <field name="re_model"/>
+          <field name="re_field"/>
+          <field name="re_prio"/>
+
+  </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="hbit_ocr.action_window">
+      <field name="name">hbit_ocr window</field>
+      <field name="res_model">hbit_ocr.hbit_ocr</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+    <record model="ir.actions.server" id="hbit_ocr.action_server">
+      <field name="name">hbit_ocr server</field>
+      <field name="model_id" ref="model_hbit_ocr_hbit_ocr"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="OCR" id="hbit_ocr.menu_root"
+    	action="hbit_ocr.action_window"/>
+  </data>
+</odoo>
